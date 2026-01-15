@@ -1,5 +1,5 @@
 namespace src.model.student;
-using src.model.card;
+using src.model;
 
 public class StudentModel{
         public int Id {get;set;}    

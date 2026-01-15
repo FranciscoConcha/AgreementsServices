@@ -1,17 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using src.model.card;
-using src.model.rol;
+using src.model;
 using src.model.student;
-using src.model.user;
 
 namespace src.context;
 
-public class CardDbContext : DbContext
+public class CardDbContext(DbContextOptions<CardDbContext> options) : DbContext(options)
 {
-    public CardDbContext(DbContextOptions<CardDbContext> options) : base(options)
-    {
-    }
-
     public DbSet<StudentModel> Students { get; set; }
     public DbSet<CardModel> Cards { get; set; }
     public DbSet<UserModel> Users {get;set;}

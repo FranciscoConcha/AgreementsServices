@@ -1,6 +1,6 @@
-using src.model.rol;
+using src.model;
 
-namespace src.model.user;
+namespace src.model;
 
 public class UserModel
 {

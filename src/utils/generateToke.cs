@@ -1,8 +1,7 @@
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using src.model.user;
+using src.model;
 
 namespace src.utils;
 
