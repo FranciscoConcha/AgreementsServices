@@ -1,8 +1,17 @@
+using src.context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+// Registrar DbContext con PostgreSQL
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
+    ?? "Host=localhost;Port=5432;Database=card_services;Username=postgres;Password=password";
+builder.Services.AddDbContext<CardDbContext>(options =>
+    options.UseNpgsql(connectionString));
 
 var app = builder.Build();
 
