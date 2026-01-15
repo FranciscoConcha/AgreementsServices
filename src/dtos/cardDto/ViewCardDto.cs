@@ -1,4 +1,4 @@
-namespace src.dtos.cardDTO;
+namespace src.dtos;
 
 public class ViewCardDto
 {

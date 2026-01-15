@@ -1,4 +1,4 @@
-using src.dtos.cardDTO;
+using src.dtos;
 
 namespace src.services.interfaces;
 

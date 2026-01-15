@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("card-services")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+41c4b5e6c3482a3a3e3cc86cc08e3bb8329bd303")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b3c3efcdb3f11b1461433389e6b8cfb12aebe92")]
 [assembly: System.Reflection.AssemblyProductAttribute("card-services")]
 [assembly: System.Reflection.AssemblyTitleAttribute("card-services")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
