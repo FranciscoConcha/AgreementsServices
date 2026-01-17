@@ -1,8 +1,8 @@
-namespace src.model.student;
-
 using src.model;
 
-public class StudentModel
+namespace src.model;
+
+public class UserModel
 {
     public int Id
     {
@@ -14,24 +14,34 @@ public class StudentModel
         get; set;
     } = string.Empty;
 
-    public string Rut
+    public string Email
     {
         get; set;
     } = string.Empty;
 
-    public string Career
+    public string Password
     {
         get; set;
     } = string.Empty;
 
-    public CardModel? Card
+    public string Charge
     {
         get; set;
-    }
+    } = string.Empty;
 
     public bool IsActive
     {
         get; set;
     }
+
+    public int RolId
+    {
+        get; set;
+    }
+
+    public RolModel Rol
+    {
+        get; set;
+    } = null!;
     
 }

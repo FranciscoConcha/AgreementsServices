@@ -9,7 +9,8 @@ public class CardDbContext(DbContextOptions<CardDbContext> options) : DbContext(
     public DbSet<StudentModel> Students { get; set; }
     public DbSet<CardModel> Cards { get; set; }
     public DbSet<UserModel> Users {get;set;}
-    public DbSet<RolModel> Rols {get;set;}
+    
+    public DbSet<RolModel> Roles {get;set;}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
