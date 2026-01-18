@@ -75,7 +75,7 @@ public class AuthServices(JwtUtils jwtUtils, CardDbContext context) : IAuthServi
             {
                 return new ResponseRegisterDto
                 {
-                    Message ="ROl no encontrado"
+                    Message ="Rol no encontrado"
                 };
             }
             var  userCreate = new UserModel

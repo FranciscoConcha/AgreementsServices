@@ -28,12 +28,12 @@ public class JwtUtils{
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyString));
 
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
         var tokenDescription = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
             Expires = DateTime.Now.AddDays(1),
-            SigningCredentials = creds
+            SigningCredentials = credentials
         };
 
         var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
