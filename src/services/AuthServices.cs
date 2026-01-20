@@ -70,12 +70,12 @@ public class AuthServices(JwtUtils jwtUtils, CardDbContext context) : IAuthServi
             }
             var passwordHash = BCrypt.Net.BCrypt.HashPassword(dataInput.Password);   
 
-            var rol = await _context. Rols.FirstOrDefaultAsync(r =>r.Name == dataInput.RolName);
+            var rol = await _context. Roles.FirstOrDefaultAsync(r =>r.Name == dataInput.RolName);
             if(rol == null)
             {
                 return new ResponseRegisterDto
                 {
-                    Message ="ROl no encontrado"
+                    Message ="Rol no encontrado"
                 };
             }
             var  userCreate = new UserModel
@@ -87,6 +87,7 @@ public class AuthServices(JwtUtils jwtUtils, CardDbContext context) : IAuthServi
                 IsActive = true,
                 RolId = rol.Id
             };
+            
             _context.Add(userCreate);
             await _context.SaveChangesAsync();
             return new ResponseRegisterDto
