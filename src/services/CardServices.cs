@@ -7,6 +7,7 @@ public class CardServices : ICardServices
 {
     public Task<ResponseViewCardDto> GetCardForStudent(string rutStudent)
     {
-        throw new NotImplementedException();
+        
+           throw new NotImplementedException();
     }
 }
