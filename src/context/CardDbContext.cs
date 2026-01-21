@@ -17,6 +17,7 @@ public class CardDbContext(DbContextOptions<CardDbContext> options) : DbContext(
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<StudentModel>().HasIndex(u=>u.Rut).IsUnique();
+
         modelBuilder.Entity<StudentModel>()
             .HasOne(s => s.Card)
             .WithOne(c => c.Student)
@@ -50,5 +51,18 @@ public class CardDbContext(DbContextOptions<CardDbContext> options) : DbContext(
                 Name = "Admin"
             }
         );
+        modelBuilder.Entity<UserModel>().HasData(
+            new UserModel
+            {
+                Id= 1,
+                Name = "Admin",
+                Email = "Admin@prueba.cl",
+                Password = "$2a$12$onr7Xs/.yyafnNC.1WkdQeDpSKHWOw7/D4XSU.oXnya0/eO3WIomW",
+                Charge = "Admin",
+                IsActive =true,
+                RolId = 3
+            }
+        );
     }
+    
 }

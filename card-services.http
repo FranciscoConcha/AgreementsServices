@@ -1,6 +1,11 @@
 @card_services_HostAddress = http://localhost:5297
+###login 
+POST {{card_services_HostAddress}}/api/auth/login
+Content-Type: application/json
 
-GET {{card_services_HostAddress}}/weatherforecast/
-Accept: application/json
+{
+    "Email": "Admin@prueba.cl",
+    "Password": "Admin123."
+}
 
 ###

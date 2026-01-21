@@ -21,7 +21,8 @@ public class JwtUtils{
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.Name, user.Name),
-            new Claim(ClaimTypes.Role, user.Rol.ToString()!)
+            new Claim(ClaimTypes.Role, user.Rol.Name),
+            new Claim("Charge", user.Charge)
         };
 
         var keyString  = _config.GetSection("AppSettings:Token").Value ?? throw new Exception("JWT no encontrada");

@@ -12,7 +12,9 @@ public class CardServices(CardDbContext context) : ICardServices
     {
         try
         {
-            var cards = await _context.Cards.ToListAsync();
+            var cards = await _context.Cards
+                                    .Include(u=>u.Uses)
+                                    .ToListAsync();
             if (cards == null || !cards.Any())
             {
                 return new ResponseViewCardListDto
@@ -52,7 +54,9 @@ public class CardServices(CardDbContext context) : ICardServices
     {
         try
         {
-            var Cards = await _context.Cards.FirstOrDefaultAsync(s =>s.Id == Id);
+            var Cards = await _context.Cards
+                                    .Include(u=>u.Uses)
+                                    .FirstOrDefaultAsync(s =>s.Id == Id);
             if(Cards == null)
             {
                 return new ResponseViewCardUnicDto
@@ -91,9 +95,11 @@ public class CardServices(CardDbContext context) : ICardServices
     {
         try
         {
-            var card = await _context.Cards.FirstOrDefaultAsync(s => s.Student != null
-                                                            && s.Student.IsActive == true
-                                                            && s.Student.Rut == rutStudent);
+            var card = await _context.Cards
+                                        .Include(u=>u.Uses)
+                                        .FirstOrDefaultAsync(s => s.Student != null
+                                                        && s.Student.IsActive == true
+                                                        && s.Student.Rut == rutStudent);
 
             if(card == null)
             {

@@ -16,7 +16,9 @@ public class AuthServices(JwtUtils jwtUtils, CardDbContext context) : IAuthServi
     {
         try
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == dataInput.Email) ;
+            var user = await _context.Users
+                                    .Include(u=>u.Rol)
+                                    .FirstOrDefaultAsync(u => u.Email == dataInput.Email) ;
             
             if (user == null)
             {
