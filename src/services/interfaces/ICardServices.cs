@@ -4,7 +4,24 @@ namespace src.services.interfaces;
 
 public interface ICardServices{
     
-    Task<ResponseViewCardDto> GetCardForStudent(string rutStudent);
+    /// <summary>
+    /// eSTO ES PARA MOSTRAR AL LA GENTE
+    /// </summary>
+    /// <param name="rutStudent"></param>
+    /// <returns></returns>
+    Task<ResponseViewCardDto> GetCardForStudentView(string rutStudent);
 
+    /// <summary>
+    /// tAMBIEN ES DEL CRUD
+    /// </summary>
+    /// <returns></returns>
+    Task<ResponseViewCardListDto> GetAllCard();
+
+    /// <summary>
+    /// ESTO ES PARA EL CRUD HACE TU LA DOCUMENTACIÓN BENJA
+    /// </summary>
+    /// <param name="Id"></param>
+    /// <returns></returns>
+    Task<ResponseViewCardUnicDto> GetByCard(int Id);
 
 }

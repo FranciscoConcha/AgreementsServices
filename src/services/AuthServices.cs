@@ -22,7 +22,8 @@ public class AuthServices(JwtUtils jwtUtils, CardDbContext context) : IAuthServi
             {
                 return new ResponseLoginDto
                 {
-                    Message ="Usuario no encontrado"
+                    Message ="Usuario no encontrado",
+                    Success =false
                 };
             }
             
@@ -31,7 +32,8 @@ public class AuthServices(JwtUtils jwtUtils, CardDbContext context) : IAuthServi
             {
                 return new ResponseLoginDto
                 {
-                    Message ="Contraseña incorrecta"
+                    Message ="Contraseña incorrecta",
+                    Success =false
                 };
             }
 
@@ -43,14 +45,16 @@ public class AuthServices(JwtUtils jwtUtils, CardDbContext context) : IAuthServi
                 Email = user.Email,
                 Token = token,
                 Rol = user.Rol.Name,
-                Charge = user.Charge
+                Charge = user.Charge,
+                Success =true
             };     
        }
         catch(Exception err)
         {
             return new ResponseLoginDto
                 {
-                    Message = "Error en el login " + err.Message
+                    Message = "Error en el login " + err.Message,
+                    Success =false
                 };
         }
     }
@@ -64,7 +68,8 @@ public class AuthServices(JwtUtils jwtUtils, CardDbContext context) : IAuthServi
             {
                 return new ResponseRegisterDto
                 {
-                    Message = "Email Registrado"
+                    Message = "Email Registrado",
+                    Success =false
                 };
 
             }
@@ -75,7 +80,8 @@ public class AuthServices(JwtUtils jwtUtils, CardDbContext context) : IAuthServi
             {
                 return new ResponseRegisterDto
                 {
-                    Message ="Rol no encontrado"
+                    Message ="Rol no encontrado",
+                    Success =false
                 };
             }
             var  userCreate = new UserModel
@@ -93,6 +99,7 @@ public class AuthServices(JwtUtils jwtUtils, CardDbContext context) : IAuthServi
             return new ResponseRegisterDto
             {
                 Message ="Usuario Creado",
+                Success =true,
                 RegisterDto = dataInput
             };
         }
@@ -100,7 +107,8 @@ public class AuthServices(JwtUtils jwtUtils, CardDbContext context) : IAuthServi
         {
             return new ResponseRegisterDto
                 {
-                    Message = "Error en el registro" + err.Message
+                    Message = "Error en el registro" + err.Message,
+                    Success =false
                 };
         }
     }

@@ -17,4 +17,6 @@ public class ResponseLoginDto
     public string? Rol {get;set;}
 
     public string? Charge {get;set;}
+    public bool Success {get;set;}
+
 }

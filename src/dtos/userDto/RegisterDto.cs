@@ -19,4 +19,6 @@ public class ResponseRegisterDto
     public string? Message {get;set;}
 
     public RegisterDto? RegisterDto {get;set;}
+    public bool Success {get;set;}
+
 }
