@@ -1,4 +1,5 @@
 @card_services_HostAddress = http://localhost:5297
+@key = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJBZG1pbkBwcnVlYmEuY2wiLCJ1bmlxdWVfbmFtZSI6IkFkbWluIiwicm9sZSI6IkFkbWluIiwiQ2hhcmdlIjoiQWRtaW4iLCJuYmYiOjE3NjkxMTcxNjgsImV4cCI6MTc2OTIwMzU2OCwiaWF0IjoxNzY5MTE3MTY4LCJpc3MiOiJjYXJkLXNlcnZpY2VzLWFwaSIsImF1ZCI6ImNhcmQtc2VydmljZXMtdXNlcnMifQ.NYIFkNPTvk4uxSoqPTQPUxdtL1cABm8NNh7XaIFYH4Q
 ###login 
 POST {{card_services_HostAddress}}/api/auth/login
 Content-Type: application/json
@@ -8,4 +9,44 @@ Content-Type: application/json
     "Password": "Admin123."
 }
 
-###
+### createStudent
+POST {{card_services_HostAddress}}/api/Student
+Content-Type: application/json
+Authorization: Bearer {{key}}
+
+{
+    "Name" :"PRUEBA",
+    "Carrer":"PRUEBA",
+    "Rut" :  "PRUEBA"
+}
+### StudentGET
+GET  {{card_services_HostAddress}}/api/Student
+Content-Type: application/json
+Authorization: Bearer {{key}}
+
+### StudentGETby id
+GET  {{card_services_HostAddress}}/api/Student/1
+Content-Type: application/json
+Authorization: Bearer {{key}}
+
+### update state
+PATCH   {{card_services_HostAddress}}/api/Student/state/1
+Content-Type: application/json
+Authorization: Bearer {{key}}
+
+### update User
+PATCH   {{card_services_HostAddress}}/api/Student/update/1
+Content-Type: application/json
+Authorization: Bearer {{key}}
+
+{
+     "Carrer": "Prueba cambio", 
+     "Name": "Prueba cambio" 
+}
+
+### Card get all
+GET   {{card_services_HostAddress}}/api/Card/id=1
+Content-Type: application/json
+Authorization: Bearer {{key}}
+
+

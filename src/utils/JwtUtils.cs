@@ -33,8 +33,10 @@ public class JwtUtils{
         var tokenDescription = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.Now.AddDays(1),
-            SigningCredentials = credentials
+            Expires = DateTime.UtcNow.AddDays(1),
+            SigningCredentials = credentials,
+            Issuer = _config["Jwt:Issuer"], 
+            Audience = _config["Jwt:Audience"] 
         };
 
         var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();

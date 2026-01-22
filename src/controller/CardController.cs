@@ -11,13 +11,13 @@ public class CardController(ICardServices cardServices) : ControllerBase
 {
     private readonly ICardServices _cardServices = cardServices;
 
-    [HttpGet()]
+    [HttpGet("{rut}")]
     public async Task<ActionResult<ResponseViewCardDto>> GetCardForStudent(string rut)
     {
         try
         {
             var response = await _cardServices.GetCardForStudentView(rut);
-            if (response.Success)
+            if (!response.Success)
             {
                 return BadRequest(new
                 {
@@ -32,10 +32,67 @@ public class CardController(ICardServices cardServices) : ControllerBase
         }
         catch(Exception ex)
         {
-             return BadRequest(new
+             return StatusCode(500,new
             {
                 Message= "ERROR: Servidor con problemas " +ex.Message
             });
         }
+    }
+    [HttpGet("")]
+    [Authorize]
+    public async Task<ActionResult<ResponseViewStudent>> GetAll()
+    {
+        try
+        {
+            var result = await _cardServices.GetAllCard();
+            if (!result.Success)
+            {
+                return BadRequest(new
+                {
+                    Message = result.Message 
+                });
+            }
+            return Ok(new
+            {
+                Message = result.Message,
+                Student = result.ViewCardList
+            });
+            
+        }catch(Exception ex)
+        {
+            return StatusCode(500,new
+            {
+                Message= "ERROR: Servidor con problemas " +ex.Message
+            });
+        }  
+    }
+
+    [HttpGet("id={id}")]
+    [Authorize]
+    public async Task<ActionResult<ResponseViewStudent>> GetById(int id)
+    {
+        try
+        {
+            var result = await _cardServices.GetByCard(id);
+            if (!result.Success)
+            {
+                return BadRequest(new
+                {
+                    Message = result.Message 
+                });
+            }
+            return Ok(new
+            {
+                Message = result.Message,
+                Student = result.ViewCardList
+            });
+            
+        }catch(Exception ex)
+        {
+            return StatusCode(500,new
+            {
+                Message= "ERROR: Servidor con problemas " +ex.Message
+            });
+        }  
     }
 }

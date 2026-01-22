@@ -36,7 +36,7 @@ public class AuthController(IAuthServices authServices): ControllerBase
             });
         }catch(Exception ex)
         {
-            return BadRequest(new
+            return StatusCode(500,new
             {
                 Message= "ERROR: Servidor con problemas " +ex.Message
             });
@@ -64,7 +64,7 @@ public class AuthController(IAuthServices authServices): ControllerBase
         }
         catch(Exception ex)
         {
-            return BadRequest(new
+            return StatusCode(500,new
             {
                 Message= "ERROR: Servidor con problemas " +ex.Message
             });

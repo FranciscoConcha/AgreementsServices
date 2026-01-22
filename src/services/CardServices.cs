@@ -13,7 +13,7 @@ public class CardServices(CardDbContext context) : ICardServices
         try
         {
             var cards = await _context.Cards
-                                    .Include(u=>u.Uses)
+                                    .Include(u=>u.Student)
                                     .ToListAsync();
             if (cards == null || !cards.Any())
             {
@@ -55,7 +55,7 @@ public class CardServices(CardDbContext context) : ICardServices
         try
         {
             var Cards = await _context.Cards
-                                    .Include(u=>u.Uses)
+                                    .Include(u=>u.Student)
                                     .FirstOrDefaultAsync(s =>s.Id == Id);
             if(Cards == null)
             {
@@ -96,7 +96,7 @@ public class CardServices(CardDbContext context) : ICardServices
         try
         {
             var card = await _context.Cards
-                                        .Include(u=>u.Uses)
+                                        .Include(u=>u.Student)
                                         .FirstOrDefaultAsync(s => s.Student != null
                                                         && s.Student.IsActive == true
                                                         && s.Student.Rut == rutStudent);
