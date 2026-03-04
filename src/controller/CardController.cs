@@ -95,4 +95,23 @@ public class CardController(ICardServices cardServices) : ControllerBase
             });
         }  
     }
+    [HttpGet("verificate/{rut}")]
+    public async Task<ActionResult<ResponseVerificateRut>> GetVerificateRut(string rut)
+    {
+        try
+        {
+            var result = await _cardServices.GetVerificateRut(rut);
+            if (!result.IsValid)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }catch(Exception ex)
+        {
+            return StatusCode(500,new
+            {
+                Message= "Error: Servidor con problemas " + ex.Message
+            });
+        }
+    }
 }

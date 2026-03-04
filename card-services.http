@@ -1,6 +1,5 @@
 @card_services_HostAddress = http://localhost:5297
-@key = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJBZG1pbkBwcnVlYmEuY2wiLCJ1bmlxdWVfbmFtZSI6IkFkbWluIiwicm9sZSI6IkFkbWluIiwiQ2hhcmdlIjoiQWRtaW4iLCJuYmYiOjE3NjkxMTcxNjgsImV4cCI6MTc2OTIwMzU2OCwiaWF0IjoxNzY5MTE3MTY4LCJpc3MiOiJjYXJkLXNlcnZpY2VzLWFwaSIsImF1ZCI6ImNhcmQtc2VydmljZXMtdXNlcnMifQ.NYIFkNPTvk4uxSoqPTQPUxdtL1cABm8NNh7XaIFYH4Q
-###login 
+@key = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJBZG1pbkBwcnVlYmEuY2wiLCJ1bmlxdWVfbmFtZSI6IkFkbWluIiwicm9sZSI6IkFkbWluIiwiQ2hhcmdlIjoiQWRtaW4iLCJuYmYiOjE3NzI1ODk2MjksImV4cCI6MTc3MjY3NjAyOSwiaWF0IjoxNzcyNTg5NjI5LCJpc3MiOiJjYXJkLXNlcnZpY2VzLWFwaSIsImF1ZCI6ImNhcmQtc2VydmljZXMtdXNlcnMifQ.PiTWU1EvQTFyzRvt9cTta9hzjkGgmVVmsvQFDq4rt4g
 POST {{card_services_HostAddress}}/api/auth/login
 Content-Type: application/json
 
@@ -48,5 +47,12 @@ Authorization: Bearer {{key}}
 GET   {{card_services_HostAddress}}/api/Card/id=1
 Content-Type: application/json
 Authorization: Bearer {{key}}
+###
+GET {{card_services_HostAddress}}/api/card/12345678-9
+
+###
+GET {{card_services_HostAddress}}/api/card/verificate/12345678-
+
+
 
 

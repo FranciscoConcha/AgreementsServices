@@ -117,6 +117,7 @@ public class CardServices(CardDbContext context) : ICardServices
                 {
                     IdCardPublic = card.Idpublic,
                     NameStudent = card.Student?.Name ?? "Usuario sin nombre",
+                    Rut = card.Student?.Rut ?? "Usuario sin rut",
                     PeriodStundet = card.ValidDate,
                     Career = card.Student?.Career ?? "Usuario sin carrera"
                 }
@@ -128,6 +129,28 @@ public class CardServices(CardDbContext context) : ICardServices
             {
                 Meessage = "Error en la consulta " + ex.Message,
                 Success =false
+            };
+        }
+    }
+
+    public async Task<ResponseVerificateRut> GetVerificateRut(string Rut)
+    {
+        try
+        {
+            var student = await _context.Students
+                                        .AnyAsync(s => s.Rut == Rut && s.IsActive == true);
+            return new ResponseVerificateRut
+            {
+                Message = student ? "RUT verificado" : "RUT no encontrado",
+                IsValid = student
+            };
+        }
+        catch(Exception ex)
+        {
+            return new ResponseVerificateRut
+            {
+                Message = "Error en la consulta" + ex.Message,
+                IsValid = false
             };
         }
     }

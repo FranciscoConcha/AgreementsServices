@@ -5,6 +5,7 @@ public class ViewCardDto
     public string IdCardPublic { get; set; } = "";
     
     public string NameStudent { get; set; } = "";
+    public string Rut {get;set;} = "";
     
     public DateTime PeriodStundet { get; set; }
     
@@ -56,4 +57,9 @@ public class ResponseViewCardListDto
     public bool Success {get;set;}
 
     public List<ViewCardListDto>? ViewCardList {get;set;} = []; 
+}
+public class ResponseVerificateRut
+{
+    public string Message {get;set;} ="";
+    public bool IsValid {get;set;} 
 }

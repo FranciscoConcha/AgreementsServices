@@ -11,6 +11,8 @@ public interface ICardServices{
     /// <returns></returns>
     Task<ResponseViewCardDto> GetCardForStudentView(string rutStudent);
 
+    Task<ResponseVerificateRut> GetVerificateRut(string Rut);
+
     /// <summary>
     /// tAMBIEN ES DEL CRUD
     /// </summary>
