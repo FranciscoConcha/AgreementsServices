@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\franc\\Desktop\\2026-1\\card-services\\card-services.csproj": {}
+    "C:\\Users\\franc\\Desktop\\2026-2\\AgreementsServices\\card-services.csproj": {}
   },
   "projects": {
-    "C:\\Users\\franc\\Desktop\\2026-1\\card-services\\card-services.csproj": {
+    "C:\\Users\\franc\\Desktop\\2026-2\\AgreementsServices\\card-services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\franc\\Desktop\\2026-1\\card-services\\card-services.csproj",
+        "projectUniqueName": "C:\\Users\\franc\\Desktop\\2026-2\\AgreementsServices\\card-services.csproj",
         "projectName": "card-services",
-        "projectPath": "C:\\Users\\franc\\Desktop\\2026-1\\card-services\\card-services.csproj",
+        "projectPath": "C:\\Users\\franc\\Desktop\\2026-2\\AgreementsServices\\card-services.csproj",
         "packagesPath": "C:\\Users\\franc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\franc\\Desktop\\2026-1\\card-services\\obj\\",
+        "outputPath": "C:\\Users\\franc\\Desktop\\2026-2\\AgreementsServices\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\franc\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -100,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

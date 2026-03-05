@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/tNNHwmon3Y=",
+  "dgSpecHash": "HF1uCn510e4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\franc\\Desktop\\2026-1\\card-services\\card-services.csproj",
+  "projectFilePath": "C:\\Users\\franc\\Desktop\\2026-2\\AgreementsServices\\card-services.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\franc\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\franc\\.nuget\\packages\\dotnetenv\\3.1.1\\dotnetenv.3.1.1.nupkg.sha512",
