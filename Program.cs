@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
     {
         options.AddPolicy("AllowReactApp", policy =>
         {
-            policy.WithOrigins("https://conveniosfront.onrender.com/")
+            policy.WithOrigins("https://conveniosfront.onrender.com")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();
@@ -30,7 +30,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<CardDbContext>(options =>
     options.UseNpgsql(connectionString));
 
-var jwtKey = builder.Configuration["Jwt:key"] ??  throw new InvalidOperationException("JWT key no configurado");
+var jwtKey = builder.Configuration["Jwt:Key"] ??  throw new InvalidOperationException("JWT key no configurado");
 var jwtIssuer = builder.Configuration["Jwt:Issuer"] ??  throw new InvalidOperationException("Jwt Issuer no configurad");
 var jwtAudience = builder.Configuration["Jwt:Audience"] ??  throw new InvalidOperationException("JWT audience no configurado");
 
@@ -52,7 +52,6 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
     };
 });
-builder.Services.AddAuthentication();
 builder.Services.AddScoped<IAuthServices,AuthServices>();
 builder.Services.AddScoped<IStudentServices, StudentServices>();
 builder.Services.AddScoped<ICardServices, CardServices>();
