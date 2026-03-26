@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: agreements-api
+    runtime: docker
+    region: oregon
+    healthCheckPath: /health
+    envVars:
+      - key: CONNECTION_STRING
+      - key: JWT_KEY
+      - key: JWT_ISSUER
+      - key: JWT_AUDIENCE
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
