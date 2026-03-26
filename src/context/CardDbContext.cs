@@ -11,6 +11,7 @@ public class CardDbContext(DbContextOptions<CardDbContext> options) : DbContext(
     public DbSet<UserModel> Users {get;set;}
     
     public DbSet<RolModel> Roles {get;set;}
+    public DbSet<AgreementsModel> Agreements {get;set;}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

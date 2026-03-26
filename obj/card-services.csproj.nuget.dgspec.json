@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\franc\\Desktop\\2026-2\\AgreementsServices\\card-services.csproj": {}
+    "C:\\Users\\franc\\Desktop\\2026-1\\AgreementsServices\\card-services.csproj": {}
   },
   "projects": {
-    "C:\\Users\\franc\\Desktop\\2026-2\\AgreementsServices\\card-services.csproj": {
+    "C:\\Users\\franc\\Desktop\\2026-1\\AgreementsServices\\card-services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\franc\\Desktop\\2026-2\\AgreementsServices\\card-services.csproj",
+        "projectUniqueName": "C:\\Users\\franc\\Desktop\\2026-1\\AgreementsServices\\card-services.csproj",
         "projectName": "card-services",
-        "projectPath": "C:\\Users\\franc\\Desktop\\2026-2\\AgreementsServices\\card-services.csproj",
+        "projectPath": "C:\\Users\\franc\\Desktop\\2026-1\\AgreementsServices\\card-services.csproj",
         "packagesPath": "C:\\Users\\franc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\franc\\Desktop\\2026-2\\AgreementsServices\\obj\\",
+        "outputPath": "C:\\Users\\franc\\Desktop\\2026-1\\AgreementsServices\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\franc\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -71,6 +71,10 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[9.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[10.0.5, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",

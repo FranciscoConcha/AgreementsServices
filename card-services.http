@@ -1,5 +1,5 @@
 @card_services_HostAddress = http://localhost:5297
-@key = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJBZG1pbkBwcnVlYmEuY2wiLCJ1bmlxdWVfbmFtZSI6IkFkbWluIiwicm9sZSI6IkFkbWluIiwiQ2hhcmdlIjoiQWRtaW4iLCJuYmYiOjE3NzI1ODk2MjksImV4cCI6MTc3MjY3NjAyOSwiaWF0IjoxNzcyNTg5NjI5LCJpc3MiOiJjYXJkLXNlcnZpY2VzLWFwaSIsImF1ZCI6ImNhcmQtc2VydmljZXMtdXNlcnMifQ.PiTWU1EvQTFyzRvt9cTta9hzjkGgmVVmsvQFDq4rt4g
+@key =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJBZG1pbkBwcnVlYmEuY2wiLCJ1bmlxdWVfbmFtZSI6IkFkbWluIiwicm9sZSI6IkFkbWluIiwiQ2hhcmdlIjoiQWRtaW4iLCJuYmYiOjE3NzQzNzEwOTMsImV4cCI6MTc3NDQ1NzQ5MywiaWF0IjoxNzc0MzcxMDkzLCJpc3MiOiJjYXJkLXNlcnZpY2VzLWFwaSIsImF1ZCI6ImNhcmQtc2VydmljZXMtdXNlcnMifQ.bWifBez2V_X8dnr5ivnAOeDz4TxdIhOgwWnfcrbkx18
 POST {{card_services_HostAddress}}/api/auth/login
 Content-Type: application/json
 
@@ -14,9 +14,9 @@ Content-Type: application/json
 Authorization: Bearer {{key}}
 
 {
-    "Name" :"PRUEBA",
+    "Name" :"PRUEB1",
     "Carrer":"PRUEBA",
-    "Rut" :  "PRUEBA"
+    "Rut" :  "12345678-3"
 }
 ### StudentGET
 GET  {{card_services_HostAddress}}/api/Student
@@ -34,7 +34,7 @@ Content-Type: application/json
 Authorization: Bearer {{key}}
 
 ### update User
-PATCH   {{card_services_HostAddress}}/api/Student/update/1
+PATCH   {{card_services_HostAddress}}/api/Student/update/4
 Content-Type: application/json
 Authorization: Bearer {{key}}
 
@@ -44,7 +44,7 @@ Authorization: Bearer {{key}}
 }
 
 ### Card get all
-GET   {{card_services_HostAddress}}/api/Card/id=1
+GET   {{card_services_HostAddress}}/api/Card/
 Content-Type: application/json
 Authorization: Bearer {{key}}
 ###

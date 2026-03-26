@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
     {
         options.AddPolicy("AllowReactApp", policy =>
         {
-            policy.WithOrigins("http://localhost:5173")
+            policy.WithOrigins("https://conveniosfront.onrender.com/")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();
@@ -57,6 +57,7 @@ builder.Services.AddScoped<IAuthServices,AuthServices>();
 builder.Services.AddScoped<IStudentServices, StudentServices>();
 builder.Services.AddScoped<ICardServices, CardServices>();
 builder.Services.AddScoped<IUserServices, UserServices>();
+builder.Services.AddScoped<IAgreementsServices, AgreementsServices>();
 builder.Services.AddScoped<JwtUtils>();
 var app = builder.Build();
 

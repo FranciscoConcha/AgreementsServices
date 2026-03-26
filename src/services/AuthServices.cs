@@ -4,9 +4,7 @@ using src.dtos.userDto;
 using src.services.interfaces;
 using src.utils;
 using src.model;
-using BCrypt.Net;
-using System.IO.Compression;
-using System.ComponentModel.DataAnnotations;
+
 public class AuthServices(JwtUtils jwtUtils, CardDbContext context) : IAuthServices
 {
     private readonly JwtUtils _utils = jwtUtils;

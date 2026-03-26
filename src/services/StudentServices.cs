@@ -233,125 +233,123 @@ public class StudentServices(CardDbContext context) : IStudentServices
         using var transaction = await _context.Database.BeginTransactionAsync();
         try
         {
-            if(file == null || file.Length == 0)
-            {
-                return new ResponseViewListStudentDto
-                {
-                    Message = "No se enviaron datos",
-                    Success =false
-                }; 
-            }
-            var extension = Path.GetExtension(file.FileName).ToLower();
-            if(extension!=".xlsx" && extension != ".xls")
-            {
-                 return new ResponseViewListStudentDto
-                {
-                    Message = "El archivo debe de ser (.xlsx o .xls)",
-                    Success =false
-                };   
-            }
-            var studentCreated = 0;
-            var studentList = new List<ViewStudentDto>();
-            var errors = new List<string>();
+            if (file == null || file.Length == 0)
+                return new ResponseViewListStudentDto { Message = "No se enviaron datos", Success = false };
 
-            #pragma warning disable CS0618 // Suprimir warning de obsoleto
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            #pragma warning restore CS0618
+            var extension = Path.GetExtension(file.FileName).ToLower();
+            if (extension != ".xlsx" && extension != ".xls")
+                return new ResponseViewListStudentDto { Message = "El archivo debe ser (.xlsx o .xls)", Success = false };
+
+            var studentCreated = 0;
+            var studentList   = new List<ViewStudentDto>();
+            var errors        = new List<string>();
+
+            ExcelPackage.License.SetNonCommercialPersonal("Francisco");
+            
+
             using (var stream = new MemoryStream())
             {
                 await file.CopyToAsync(stream);
-                using var package =new ExcelPackage(stream);
+                using var package   = new ExcelPackage(stream);
+                var worksheet       = package.Workbook.Worksheets[0];
+                var rowCount        = worksheet.Dimension?.Rows ?? 0;
 
-                var worksheet = package.Workbook.Worksheets[0];
-                var rowCount = worksheet.Dimension?.Rows ?? 0;
-                if(rowCount <= 1)
-                {
-                    return new ResponseViewListStudentDto
-                    {
-                        Message = "El archivo está vacío o solo tiene encabezados",
-                        Success = false
-                    };
-                }
-                for (int row = 2; row<= rowCount; row++)
+                if (rowCount <= 1)
+                    return new ResponseViewListStudentDto { Message = "El archivo está vacío o solo tiene encabezados", Success = false };
+
+                
+                for (int row = 2; row <= rowCount; row++)
                 {
                     try
                     {
-                        var name = worksheet.Cells[row,1].Value?.ToString()?.Trim();
-                        var career = worksheet.Cells[row,2].Value?.ToString()?.Trim();
-                        var rut = worksheet.Cells[row,3].Value?.ToString()?.Trim();    
-                        
-                        if(string.IsNullOrEmpty(name) ||string.IsNullOrEmpty(career)|| string.IsNullOrEmpty(rut))
+                        // Mapeo de columnas
+                        // SEDE(1) COD_CARRERA(2) NOM_CARRERA(3) RUT(4) NOMBRES(5)
+                        // NOMBRE_SOCIAL(6) APELLIDO_1(7) APELLIDO_2(8) CODESTADO_ACTUAL(9)
+                        // ESTADO_ACTUAL(10) ADMISION(11) SEXO(12) FECHA_NACIMIENTO(13)
+                        // EDAD(14) CORREO_INSTITUCIONAL(15) CORREO_PERSONAL(16) TELEFONO(17)
+
+                        var rut     = worksheet.Cells[row, 4].Value?.ToString()?.Trim();
+                        var nombres = worksheet.Cells[row, 5].Value?.ToString()?.Trim();
+                        var ap1     = worksheet.Cells[row, 7].Value?.ToString()?.Trim();
+                        var ap2     = worksheet.Cells[row, 8].Value?.ToString()?.Trim();
+                        var career  = worksheet.Cells[row, 3].Value?.ToString()?.Trim();
+                        var estado  = worksheet.Cells[row, 10].Value?.ToString()?.Trim()?.ToUpper();
+
+                        var name = string.Join(" ", new[] { nombres, ap1, ap2 }
+                            .Where(s => !string.IsNullOrEmpty(s)));
+
+                        if (string.IsNullOrEmpty(rut) || string.IsNullOrEmpty(name) || string.IsNullOrEmpty(career))
                         {
-                            errors.Add($"Fila {row}: Datos incompletos");
+                            errors.Add($"Fila {row}: Datos incompletos (RUT, nombre o carrera vacíos)");
                             continue;
                         }
 
-                        var existingStudent = await _context.Students
-                            .FirstOrDefaultAsync(s => s.Rut == rut);
-                        
-                        if(existingStudent != null)
+                        var existingStudent = await _context.Students.FirstOrDefaultAsync(s => s.Rut == rut);
+                        if (existingStudent != null)
                         {
                             errors.Add($"Fila {row}: El RUT {rut} ya existe");
                             continue;
                         }
+
                         var student = new StudentModel
-                            {
-                                Name = name,
-                                Career = career,
-                                Rut = rut,
-                                IsActive = true
-                            };
+                        {
+                            Name     = name,
+                            Rut      = rut,
+                            Career   = career,
+                            IsActive = estado == "ACTIVO"
+                        };
 
                         await _context.Students.AddAsync(student);
                         await _context.SaveChangesAsync();
 
                         var card = new CardModel
-                            {
-                                Idpublic =  Guid.NewGuid().ToString(),
-                                Uses = 0,
-                                StudentId=student.Id,
-                                ValidDate=DateTime.UtcNow,
-                                Student =student
-                            };
-                        await  _context.Cards.AddAsync(card);
-                        await _context.SaveChangesAsync();
-                        
-                        var studentDtoCreated = new ViewStudentDto
                         {
-                            Id = student.Id,
-                            Name = student.Name,
-                            Rut = student.Rut,
-                            Career = student.Career,
-                            IsActive = student.IsActive
+                            Idpublic  = Guid.NewGuid().ToString(),
+                            Uses      = 0,
+                            StudentId = student.Id,
+                            ValidDate = DateTime.UtcNow,
+                            Student   = student
                         };
-                        studentList.Add(studentDtoCreated);
+
+                        await _context.Cards.AddAsync(card);
+                        await _context.SaveChangesAsync();
+
+                        studentList.Add(new ViewStudentDto
+                        {
+                            Id       = student.Id,
+                            Name     = student.Name,
+                            Rut      = student.Rut,
+                            Career   = student.Career,
+                            IsActive = student.IsActive
+                        });
+
                         studentCreated++;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         errors.Add($"Fila {row}: {ex.Message}");
                     }
                 }
-                
-            } 
+            }
+
             await transaction.CommitAsync();
-            
+
             return new ResponseViewListStudentDto
             {
-                Message = $"Se crearon {studentCreated} estudiantes exitosamente",
-                Success = true,
+                Message        = $"Se crearon {studentCreated} estudiantes exitosamente",
+                Success        = true,
                 ViewStudentDto = studentList,
-                Errors = errors
+                Errors         = errors
             };
-            
-        }catch(Exception ex)
+        }
+        catch (Exception ex)
         {
             await transaction.RollbackAsync();
             return new ResponseViewListStudentDto
             {
-                Message = "Error en la consulta " + ex.Message,
-                Success =false
-            }; 
+                Message = "Error en la consulta: " + ex.Message,
+                Success = false
+            };
         }
     }
 }
