@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
     {
         options.AddPolicy("AllowReactApp", policy =>
         {
-            policy.WithOrigins("https://conveniosfront.onrender.com")
+            policy.WithOrigins("https://convenios-front.vercel.app")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();
