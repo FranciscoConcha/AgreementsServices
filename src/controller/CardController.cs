@@ -133,13 +133,13 @@ public class CardController(ICardServices cardServices) : ControllerBase
         }
     }
 
-    [HttpGet("check")]
+    [HttpGet("check/{idPublic}")]
     [Authorize]
-    public async Task<ActionResult<ResponseCardByIdPublic>> GetByIdPublic([FromBody] InputDataCardByIdPublic input)
+    public async Task<ActionResult<ResponseCardByIdPublic>> GetByIdPublic(string idPublic)
     {
         try
         {
-            var response = await _cardServices.GetByIdPublic(input);
+            var response = await _cardServices.GetByIdPublic(new InputDataCardByIdPublic{PublicIdCard = idPublic});
             if (!response.Success)
             {
                 return BadRequest(response);
