@@ -11,4 +11,5 @@ public interface IAgreementsServices
     Task<ResponseUpdateAgreements> UpdateAgreement(int id, UpdateAgreements agreement);
     Task<ResponseUpdateStateAgreements> UpdateStateAgreement(int id);
     Task<ResponseDeleteAgreements> DeleteAgreement(int id);
+    
 }

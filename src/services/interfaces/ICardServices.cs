@@ -26,4 +26,6 @@ public interface ICardServices{
     /// <returns></returns>
     Task<ResponseViewCardUnicDto> GetByCard(int Id);
 
+    Task<ResponseUseDto> UpdateUseCard(UpdateUseDto updateUseDto);
+
 }

@@ -154,4 +154,38 @@ public class CardServices(CardDbContext context) : ICardServices
             };
         }
     }
+
+    public async Task<ResponseUseDto> UpdateUseCard(UpdateUseDto updateUseDto)
+    {
+        try
+        {
+            var data = await _context.Cards
+                                    .Include(u=>u.Student)
+                                    .FirstOrDefaultAsync(u =>u.Idpublic == updateUseDto.PublicIdCard);
+            var isActive = data?.Student?.IsActive ?? false;
+            Console.Write(data);
+            if(data == null || !isActive)
+            {
+                return new ResponseUseDto
+                {
+                    Succes = false,
+                    Message = "No existe el usuario"
+                };
+            }
+            data.Uses++;
+            await _context.SaveChangesAsync();
+            return new ResponseUseDto
+            {
+                Succes = true,
+                Message = "Se aumento el uso"
+            };
+        }catch(Exception err)
+        {
+            return new ResponseUseDto
+            {
+                Succes =false,
+                Message = "ERROR: Error en el servidor " + err.Message
+            };
+        }
+    }
 }

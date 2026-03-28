@@ -114,4 +114,21 @@ public class CardController(ICardServices cardServices) : ControllerBase
             });
         }
     }
+    [HttpPatch("")]
+    public async Task<ActionResult<ResponseUseDto>> UpdateUseCard([FromBody] UpdateUseDto updateUseDto)
+    {
+        try
+        {
+            var response = await _cardServices.UpdateUseCard(updateUseDto);
+            if (!response.Succes)
+            {
+                return BadRequest(response.Message);
+            }
+            return Ok(response);
+        }catch(Exception err)
+        {
+            return StatusCode(500,
+            "ERROR: EN EL SERVIDOR "+ err.Data);
+        }
+    }
 }
