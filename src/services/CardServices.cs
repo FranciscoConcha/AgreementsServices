@@ -91,6 +91,47 @@ public class CardServices(CardDbContext context) : ICardServices
         }
     }
 
+    public async Task<ResponseCardByIdPublic> GetByIdPublic(InputDataCardByIdPublic input)
+    {
+        try
+        {
+            var response = await _context.Cards
+                                        .Include(s =>s.Student)
+                                        .FirstOrDefaultAsync(s=>s.Idpublic == input.PublicIdCard);
+
+            var isActiveStudent = response?.Student?.IsActive ?? false;
+            if(response == null || !isActiveStudent)
+            {
+                return new ResponseCardByIdPublic
+                {
+                    Success = false,
+                    Message ="No se encontraron datos"
+                };
+            }
+            var completName = response?.Student?.Name ?? "Nombre no encontrado";
+            var carrerStudent = response?.Student?.Career ?? "Carrera no encontrada";
+            return new ResponseCardByIdPublic
+            {
+                Success =true,
+                Message ="Se encontraron datos",
+                Data = new CardDto
+                {
+                    Idpublic = input.PublicIdCard,
+                    StudentName = completName,
+                    CareerStudent = carrerStudent
+                }
+            };
+        }catch(Exception err)
+        {
+            return new ResponseCardByIdPublic
+            {
+                Success =false,
+                Message = "ERROR: PROBLEMAS EN EL SERVIDOR " +err.Message
+            };
+        }
+        throw new NotImplementedException();
+    }
+
     public async Task<ResponseViewCardDto> GetCardForStudentView(string rutStudent)
     {
         try

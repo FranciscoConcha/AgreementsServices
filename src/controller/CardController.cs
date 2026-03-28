@@ -115,6 +115,7 @@ public class CardController(ICardServices cardServices) : ControllerBase
         }
     }
     [HttpPatch("")]
+    [Authorize]
     public async Task<ActionResult<ResponseUseDto>> UpdateUseCard([FromBody] UpdateUseDto updateUseDto)
     {
         try
@@ -129,6 +130,28 @@ public class CardController(ICardServices cardServices) : ControllerBase
         {
             return StatusCode(500,
             "ERROR: EN EL SERVIDOR "+ err.Data);
+        }
+    }
+
+    [HttpGet("check")]
+    [Authorize]
+    public async Task<ActionResult<ResponseCardByIdPublic>> GetByIdPublic([FromBody] InputDataCardByIdPublic input)
+    {
+        try
+        {
+            var response = await _cardServices.GetByIdPublic(input);
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }    
+            return Ok(new {
+                message = response.Message,
+                data = response.Data
+            });
+        }
+        catch(Exception err)
+        {
+            return StatusCode(500,"ERROR EN EL SERVIDOR " + err.Message);
         }
     }
 }

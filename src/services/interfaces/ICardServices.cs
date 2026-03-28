@@ -28,4 +28,6 @@ public interface ICardServices{
 
     Task<ResponseUseDto> UpdateUseCard(UpdateUseDto updateUseDto);
 
+    Task<ResponseCardByIdPublic> GetByIdPublic(InputDataCardByIdPublic input);
+
 }
